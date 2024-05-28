@@ -4,7 +4,7 @@ from flask import (
     Flask,
     jsonify,
 )
-from model import database as db
+from model import models as md
 
 
 app = Flask(__name__)
@@ -15,11 +15,9 @@ app.config.from_object("config.config.Config")
 def hello_world():
     return jsonify(hello="world")
 
-@app.route("/db")
-def hello_db():
-    db.PgDatabase().exec("CREATE TABLE test(id serial PRIMARY KEY, name varchar, email varchar)")
-    items = db.PgDatabase().select("SELECT * FROM test")
-    return jsonify(hello=str(items))
+# @app.route("/db")
+# def hello_db():
+#     return jsonify(result)
 
 
 # @app.route("/static/<path:filename>")
