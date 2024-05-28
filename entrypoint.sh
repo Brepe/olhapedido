@@ -1,5 +1,12 @@
 #!/bin/bash
 set -e
+# Function to wait for PostgreSQL to be ready
+wait_for_postgres() {
+    until pg_isready -h "$SQL_HOST" -p "$SQL_PORT" -U "$POSTGRES_USER"; do
+      echo "Waiting for PostgreSQL to be ready..."
+      sleep 2
+    done
+}
 
 if [ "$1" = 'postgres' ]; then
 	chown -R postgres "$PGDATA"
