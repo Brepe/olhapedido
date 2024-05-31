@@ -5,15 +5,23 @@ from flask import (
     jsonify,
 )
 from model import models as md
+from .views import main
+
+# app = Flask(__name__)
+# app.config.from_object("config.config.Config")
 
 
-app = Flask(__name__)
-app.config.from_object("config.config.Config")
+def create_app():
+    app = Flask(__name__, template_folder="../templates")
+    #app.run(host="0.0.0.0", port=5000)  # Add this line to start the app
+    # Register the Blueprint
+    app.register_blueprint(main)
 
+    return app
 
-@app.route("/")
-def hello_world():
-    return jsonify(hello="world")
+# @app.route("/")
+# def hello_world():
+#     return jsonify(hello="world")
 
 # @app.route("/db")
 # def hello_db():

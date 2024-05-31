@@ -31,7 +31,7 @@ COPY . /usr/src/app/
 
 # Expose the PostgreSQL port
 EXPOSE 5432
-
+EXPOSE 5001
 # Add VOLUMEs to allow backup of config, logs and databases
 # VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
