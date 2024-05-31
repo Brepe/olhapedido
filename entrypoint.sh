@@ -75,3 +75,9 @@ if [ "$1" = 'postgres' ]; then
 fi
 
 exec "$@"
+
+# Rodar o Flask no fly.io produção
+if [ "$ENVIRON" = 'prod' ]; then
+	exec python manage.py run -h 0.0.0.0 -p 5001
+fi
+#---------------------------------------------#
