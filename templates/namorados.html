@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Snack & Cake - Dia dos Namorados</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+    <link rel="stylesheet" href="{{ url_for('main.static', filename=style)}}">
+</head>
+<body>
+
+    <!-- <header class="bg-danger text-white text-center py-4"> -->
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="">
+              <img src="{{ url_for('main.static', filename=logo)}}" width="100" height="100" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fa-brands fa-square-instagram"></i><span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-brands fa-tiktok"></i></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><i class="fa-brands fa-square-twitter"></i></a>
+                  </li>
+                </ul>
+            </div>
+        </nav>    
+    </header>
+    <main class="container mt-4">
+      <div class="row align-items-center text-center">
+        <p class="lead">Dia dos namorados 2024 - Caixa personalizada com presente  
+      </div>
+      <div class="row align-items-center">
+          <div class="col card card-full ">
+              <!-- <p class="card-title"></p> -->
+              <div class="card-header text-center">
+                Escolha o modelo
+              </div>
+            
+              <ul class="list-group list-group-flush">
+                {% for c in caixas %} 
+                  <li class="list-group-item">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="{{c.nome}}" name="flexRadioDefault" name="flexRadioDefault{{loop.index}}" {{ "checked" if loop.index == 1 }} onclick="calculateQTc('{{c.nome}}');">
+                        <label class="form-check-label" for="flexRadioDefault{{loop.index}}">
+                            <img src="{{ url_for('main.static', filename='images/'+c.img)}}" alt="Image 3" class="img-thumbnail" style="width: 50px; height: 50px;">
+                            {{c.nome}} - 
+                            R$ {{c.preco}}
+                            <p class="desc">{{c.desc}}</p>
+                        </label>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            
+          </div>
+          <div class="col card card-full text-center">
+              <!-- <p class="card-title"></p> -->
+              <div class="card-header">
+                Personalize {{processed}}
+              </div>
+              <ul class="list-group list-group-flush div-subprod">
+                {% for s in subprod %} 
+                  <li class="list-group-item">
+                    <!-- <select class="form-select" aria-label="Disabled select example" disabled> -->
+                      <div class="d-flex align-items-center">
+                        <img src="{{ url_for('main.static', filename='images/'+s.itens[0].image)}}" alt="Image" name="{{s.lista}}" class="img-thumbnail" style="width: 50px; height: 50px; margin-right: 10px;">
+                        <div>
+                            <select name="select-subprod-{{loop.index}}" class="form-select mt-2" aria-label="Default select example">
+      
+                                <option value="title" disabled selected>{{s.lista}}</option>
+                                {% for it in s.itens %} 
+                                  <option value="{{it.image}}">{{it.nome}}</option>
+                                {% endfor %}
+                            
+
+                            </select>
+                        </div>
+                      </div>
+                  </li>
+                {% endfor %}
+              </ul>
+
+          </div>
+          <div class="col  card card-full text-center">
+              <!-- <p class="card-title"></p> -->
+              <div class="card-header">
+                Resumo
+              </div>
+            
+              <form>
+                <div class="mb-3">
+                  <label for="staticEmail" class=" col-form-label">EmailEmailEmailEmail EmailEmailEmailEmailEmail EmailEmailEmailEmail Email</label>
+                  <!-- <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                  </div> -->
+                </div>
+                <div class="mb-3">                  
+                    <!-- <label for="inputPassword2" class="visually-hidden">Nome completo:</label> -->
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Nome completo:">                
+                </div>
+                <div class="mb-3">                  
+                  <!-- <label for="inputPassword2" class="visually-hidden">Whatsapp:</label> -->
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Whatsapp:">                
+                </div>
+                <div class="mb-3">                  
+                  <!-- <label for="inputPassword2" class="visually-hidden">Nome dele(a):</label> -->
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Endereço: (Rua, número, bairro)">                
+                </div>
+                <div class="mb-3">                  
+                  <!-- <label for="inputPassword2" class="visually-hidden">Nome dele(a):</label> -->
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Nome dele(a):">                
+                </div>
+                <div class="mb-3 form-check">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">Pix</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Cartão (via Mercado Pago)</label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Ir para pagamento</button>
+              </form>
+        </div>
+      </div>
+
+    </main>
+    <footer class="text-white text-center py-4">
+
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7f470ebe63.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

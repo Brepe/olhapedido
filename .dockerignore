@@ -162,3 +162,5 @@ site
 
 **\z.sql
 fly.toml
+/build
+/public/build

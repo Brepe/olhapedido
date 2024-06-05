@@ -160,4 +160,8 @@ cython_debug/
 #.idea/
 
 **\z.sql
+**\initial_data.sql
 fly.toml
+**\images
+static/images
+static/images/

@@ -1,0 +1,42 @@
+:root {
+    --b-pink-low: #e984bd;
+    --b-brown-low: #b38a7a;
+    --b-pink: #d2338d;
+    --b-brown: #684639;
+  }
+
+  @font-face {
+    font-family: 'Klenik';
+    src: url('Klenik.otf') format('opentype');
+    font-weight: normal;
+  }
+  
+body {
+    background-color: #eeeeee;
+    color: #333; 
+}
+
+header {
+    /* background-color: var(--b-pink-low); */
+    /* background: repeating-linear-gradient(60deg, var(--b-pink-low) 0px,  var(--b-brown-low) 1px,  var(--b-brown-low)  45px,  var(--b-pink-low) 11px,  var(--b-pink-low) 90px) !important; */
+}
+
+.gallery img {
+    border-radius: 8px;
+}
+.btn-bd-primary {
+    font-family: 'Klenik', sans-serif; 
+    background-color: var(--b-pink-low);
+    /* color: var(--b-brown); */
+  }
+  .btn-bd-primary:hover{
+    background-color: var(--b-pink);
+    color: white;
+}
+
+.card-full{
+    height: 60vh;
+}
+.desc{
+    font-size: 70%;
+}

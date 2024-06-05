@@ -11,4 +11,4 @@ class Config(object):
     pg_db = os.getenv("POSTGRES_DB")
     #SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/service/static"
-    MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/service/media"
+    MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/media"

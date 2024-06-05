@@ -7,15 +7,12 @@ class PgDatabase(object):
 
     def connect(self):
         try:
-            pg_host = os.getenv("SQL_HOST")
-            pg_user = os.getenv("POSTGRES_USER")
-            pg_pass = os.getenv("POSTGRES_PASSWORD")
-            pg_db = os.getenv("POSTGRES_DB")
-
-            con = psycopg2.connect(dbname=pg_db,
-                                    user=pg_user,
-                                    host=pg_host,
-                                    password=pg_pass)
+            # pg_host = os.getenv("SQL_HOST")
+            # pg_user = os.getenv("POSTGRES_USER")
+            # pg_pass = os.getenv("POSTGRES_PASSWORD")
+            # pg_db = os.getenv("POSTGRES_DB")
+            pg_url = os.getenv("DATABASE_URL")
+            con = psycopg2.connect(pg_url)
             
             return con
         except Exception as error:
@@ -157,3 +154,39 @@ class PgDatabase(object):
         else:
             filter_data_fm = "".join(f"'{variable}'")
         return filter_data_fm
+    
+    def execute_sql_file(self, sql_file):
+        try:
+            # Connect to the PostgreSQL database
+            conn = self.connect(self)
+            cursor = conn.cursor()
+            
+            # Read the SQL file and process each line
+            sql_file_path = './model/'+sql_file
+            with open(sql_file_path, 'r') as file:
+                sql_lines = file.readlines()
+            
+            sql_script = ""
+            for line in sql_lines:
+                stripped_line = line.strip()
+                # Skip empty lines and comment lines
+                if not stripped_line or stripped_line.startswith('--'):
+                    continue
+                # Execute the SQL statement if it ends with a semicolon
+                sql_script = str(line)
+                if stripped_line.endswith(';'):
+                    cursor.execute(sql_script)
+                    
+            
+            # Commit changes
+            conn.commit()
+            return True
+            
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return str(e)
+            
+        finally:
+            # Close the cursor and connection
+            cursor.close()
+            conn.close()

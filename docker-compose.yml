@@ -6,6 +6,7 @@ services:
     command: python manage.py run -h 0.0.0.0
     volumes:
       - ./:/usr/src/app/
+      - /media:/media
     ports:
       - 5001:5000
     env_file:

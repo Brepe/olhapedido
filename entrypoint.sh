@@ -73,11 +73,14 @@ if [ "$1" = 'postgres' ]; then
 	
 	exec gosu postgres "$@"
 fi
-
 exec "$@"
-
+#/model:/docker-entrypoint-initdb.d
 # Rodar o Flask no fly.io produção
 if [ "$ENVIRON" = 'prod' ]; then
-	exec python manage.py run -h 0.0.0.0 -p 5001
+	# Define environment variables \connect olhapedido \connect -U flypgadmin
+	# Run the SQL script to create tables and constraints
+	# psql -h olhapedidodb.internal -U flypgadmin -d olhapedido -f /model/database.sql 
+	exec "$@"
+	#exec python manage.py run -h 0.0.0.0 -p 5001
 fi
 #---------------------------------------------#

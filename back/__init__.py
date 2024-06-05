@@ -4,7 +4,6 @@ from flask import (
     Flask,
     jsonify,
 )
-from model import models as md
 from .views import main
 
 # app = Flask(__name__)
@@ -12,8 +11,8 @@ from .views import main
 
 
 def create_app():
-    app = Flask(__name__, template_folder="../templates")
-    #app.run(host="0.0.0.0", port=5000)  # Add this line to start the app
+    app = Flask(__name__, template_folder="../templates", static_folder="../static")
+    #app.run()  # Add this line to start the ap
     # Register the Blueprint
     app.register_blueprint(main)
 
